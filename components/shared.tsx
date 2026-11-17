@@ -96,20 +96,6 @@ export function Section({
   )
 }
 
-export function DadosSimulados({ className }: { className?: string }) {
-  return (
-    <span
-      className={cn(
-        'inline-flex items-center gap-1.5 rounded-full border border-border bg-muted px-2 py-0.5 text-[11px] font-medium text-muted-foreground',
-        className,
-      )}
-    >
-      <span className="size-1.5 rounded-full bg-muted-foreground" aria-hidden />
-      Dados simulados
-    </span>
-  )
-}
-
 // ---------- Cartões ----------
 
 export function MetricCard({

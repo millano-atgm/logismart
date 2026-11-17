@@ -11,7 +11,7 @@ const geistMono = Geist_Mono({ subsets: ['latin'], variable: '--font-geist-mono'
 export const metadata: Metadata = {
   title: 'LogiSmart — Gestão Inteligente de Frotas',
   description:
-    'Protótipo acadêmico de plataforma de gestão inteligente de frotas: transforma dados operacionais simulados de TMS e telemetria em indicadores, alertas e sugestões de ação. Alinhado às ODS 9 e ODS 12.',
+    'Plataforma de gestão inteligente de frotas com indicadores, alertas e sugestões de ação. Alinhado às ODS 9 e ODS 12.',
   generator: 'v0.app',
   icons: {
     icon: [

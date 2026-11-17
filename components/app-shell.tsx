@@ -13,8 +13,6 @@ import {
   Leaf,
   Menu,
   Route,
-  RotateCcw,
-  RefreshCw,
   Truck,
   TriangleAlert,
   UserRound,
@@ -101,25 +99,6 @@ function NavLinks({ onNavigate }: { onNavigate?: () => void }) {
   )
 }
 
-function Rodape() {
-  const { restaurarDemo, novaSimulacao } = useDemo()
-  return (
-    <div className="flex flex-col gap-2 border-t border-sidebar-border px-3 py-3">
-      <Button variant="default" size="sm" className="w-full" onClick={novaSimulacao}>
-        <RefreshCw className="size-3.5" data-icon="inline-start" />
-        Nova Simulação
-      </Button>
-      <Button variant="outline" size="sm" className="w-full" onClick={restaurarDemo}>
-        <RotateCcw className="size-3.5" data-icon="inline-start" />
-        Restaurar dados da demonstração
-      </Button>
-      <p className="px-1 text-[11px] leading-relaxed text-muted-foreground">
-        Protótipo acadêmico — ODS 9 e ODS 12. Dados simulados de TMS e telemetria.
-      </p>
-    </div>
-  )
-}
-
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
   const [menuAberto, setMenuAberto] = useState(false)
@@ -144,7 +123,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             <NavLinks />
           </div>
         </div>
-        <Rodape />
+
       </aside>
 
       {/* Menu lateral — celular */}
@@ -173,7 +152,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                 <NavLinks onNavigate={() => setMenuAberto(false)} />
               </div>
             </div>
-            <Rodape />
+
           </div>
         </div>
       ) : null}
@@ -194,7 +173,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             <h1 className="truncate text-sm font-semibold tracking-tight sm:text-base">{titulo}</h1>
             <span className="hidden items-center gap-1.5 text-[11px] text-muted-foreground sm:flex">
               <Activity className="size-3 text-success" aria-hidden />
-              Sincronizado com TMS simulado · {ultimaAtualizacao}
+              Atualizado · {ultimaAtualizacao}
             </span>
           </div>
 

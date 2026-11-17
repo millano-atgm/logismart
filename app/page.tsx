@@ -1,11 +1,10 @@
 'use client'
 
 import Link from 'next/link'
-import { ArrowRight, Fuel, Leaf, RefreshCw, Truck, TriangleAlert, Wifi } from 'lucide-react'
+import { ArrowRight, Leaf, Truck, TriangleAlert, Wifi } from 'lucide-react'
 import { AreaChart, BarChart, Gauge, RankBar } from '@/components/charts'
 import {
   AnaliseBox,
-  DadosSimulados,
   InsightCard,
   KpiTile,
   MetricCard,
@@ -19,7 +18,7 @@ import { CONSUMO_MEDIO_FROTA, co2Semana, consumoSemana, utilizacaoSemana } from 
 import { useDemo } from '@/lib/store'
 
 export default function VisaoGeralPage() {
-  const { veiculos, insights, resumo, novaSimulacao, ultimaAtualizacao } = useDemo()
+  const { veiculos, insights, resumo, ultimaAtualizacao } = useDemo()
 
   const destaque = veiculos.filter((v) =>
     ['cam-02', 'vei-08', 'cam-11', 'cam-05', 'vei-14'].includes(v.id),
@@ -42,15 +41,8 @@ export default function VisaoGeralPage() {
       <div className="flex flex-wrap items-start justify-between gap-3">
         <PageIntro
           titulo="Como está a frota agora"
-          descricao="O LogiSmart lê os dados operacionais de TMS e telemetria, interpreta os desvios e sugere a próxima ação para o gestor. Todos os dados desta demonstração são simulados."
+          descricao="O LogiSmart lê os dados operacionais de TMS e telemetria, interpreta os desvios e sugere a próxima ação para o gestor."
         />
-        <div className="flex items-center gap-2">
-          <DadosSimulados />
-          <Button variant="outline" size="sm" onClick={novaSimulacao}>
-            <RefreshCw className="size-3.5" data-icon="inline-start" />
-            Nova Simulação
-          </Button>
-        </div>
       </div>
 
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
@@ -87,7 +79,7 @@ export default function VisaoGeralPage() {
 
       <Section
         titulo="Indicadores da Frota"
-        descricao="Últimos 7 dias — dados consolidados de telemetria simulada."
+        descricao="Últimos 7 dias — dados consolidados de telemetria."
         acao={
           <Button render={<Link href="/analises" />} variant="ghost" size="sm">
             Abrir análises
@@ -186,10 +178,6 @@ export default function VisaoGeralPage() {
         texto="A frota opera com 87% de utilização e consumo médio de 8,4 km/L. Três veículos estão consumindo acima do esperado (Caminhão 02, 03 e 12) e concentram a maior parte do custo extra de combustível. O ponto mais urgente é a temperatura do Caminhão 02 — tratá-lo hoje evita uma parada não programada na BR-116."
       />
 
-      <div className="flex items-center gap-2 text-xs text-muted-foreground">
-        <Fuel className="size-3.5" aria-hidden />
-        Protótipo acadêmico sem conexão real com veículos, GPS ou APIs externas.
-      </div>
     </>
   )
 }

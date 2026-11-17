@@ -3,10 +3,9 @@
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import { useState } from 'react'
-import { ArrowRight, MapPin, Route as RouteIcon, Timer } from 'lucide-react'
+import { ArrowRight, MapPin, Route as RouteIcon } from 'lucide-react'
 import {
   AnaliseBox,
-  DadosSimulados,
   KpiTile,
   PageIntro,
   Section,
@@ -145,9 +144,8 @@ export default function RotasPage() {
       <div className="flex flex-wrap items-start justify-between gap-3">
         <PageIntro
           titulo="Rotas em andamento"
-          descricao="Mapa geográfico das rotas ativas, situação do trânsito e alternativas sugeridas pelo sistema. As posições dos veículos são simuladas para esta demonstração."
+          descricao="Mapa geográfico das rotas ativas, situação do trânsito e alternativas sugeridas pelo sistema."
         />
-        <DadosSimulados />
       </div>
 
       <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
@@ -165,7 +163,7 @@ export default function RotasPage() {
         />
       </div>
 
-      <Section titulo="Posições da frota" descricao="Marcadores e deslocamentos são simulados a partir das rotas ativas.">
+      <Section titulo="Posições da frota">
         <FleetMap rotas={rotas} veiculos={veiculos} selecionada={selecionada} onSelecionar={setSelecionada} ultimaAtualizacao={ultimaAtualizacao} />
       </Section>
 
@@ -196,10 +194,6 @@ export default function RotasPage() {
         texto="Dois veículos estão no mesmo corredor congestionado. A Rota Alternativa B pode reduzir aproximadamente 40 minutos no Veículo 08 e evitar 25 minutos de espera no Caminhão 02 — que também possui alerta de temperatura e deve ser desviado para a oficina mais próxima."
       />
 
-      <p className="inline-flex items-center gap-2 text-xs text-muted-foreground">
-        <Timer className="size-3.5" aria-hidden />
-        Tempos e condições de trânsito simulados para demonstração em sala de aula.
-      </p>
     </>
   )
 }

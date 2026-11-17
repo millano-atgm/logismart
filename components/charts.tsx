@@ -53,7 +53,7 @@ export function AreaChart({
           preserveAspectRatio="none"
           className="h-full w-full overflow-visible"
           role="img"
-          aria-label="Gráfico de linha com dados simulados"
+          aria-label="Gráfico de linha"
         >
           <defs>
             <linearGradient id={gradId} x1="0" y1="0" x2="0" y2="1">

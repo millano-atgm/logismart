@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react'
 import { Search } from 'lucide-react'
-import { DadosSimulados, KpiTile, PageIntro, Section } from '@/components/shared'
+import { KpiTile, PageIntro, Section } from '@/components/shared'
 import { Input, Select } from '@/components/ui/field'
 import { VehicleTable } from '@/components/vehicle-table'
 import { CONSUMO_MEDIO_FROTA, statusLabel, type VehicleStatus } from '@/lib/data'
@@ -45,7 +45,6 @@ export default function VeiculosPage() {
           titulo="Veículos da frota"
           descricao="Pesquise, filtre e abra o detalhamento de cada veículo com a análise gerada pelo sistema."
         />
-        <DadosSimulados />
       </div>
 
       <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">

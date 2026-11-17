@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { ArrowRight, ChevronRight, Route as RouteIcon, Wrench } from 'lucide-react'
-import { AnaliseBox, DadosSimulados, KpiTile, SeveridadeBadge, Section, StatusBadge } from '@/components/shared'
+import { AnaliseBox, KpiTile, SeveridadeBadge, Section, StatusBadge } from '@/components/shared'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { CONSUMO_MEDIO_FROTA } from '@/lib/data'
@@ -17,7 +17,7 @@ export default function VeiculoDetalhePage() {
   if (!veiculo) {
     return (
       <div className="flex flex-col items-start gap-4 rounded-xl border border-dashed border-border p-8">
-        <p className="text-sm text-muted-foreground">Veículo não encontrado nesta demonstração.</p>
+        <p className="text-sm text-muted-foreground">Veículo não encontrado.</p>
         <Button render={<Link href="/veiculos" />} variant="outline" size="sm">
           Voltar para a lista
         </Button>
@@ -53,7 +53,6 @@ export default function VeiculoDetalhePage() {
             {veiculo.motorista}
           </p>
         </div>
-        <DadosSimulados />
       </div>
 
       <div className="grid grid-cols-2 gap-3 lg:grid-cols-3 xl:grid-cols-6">

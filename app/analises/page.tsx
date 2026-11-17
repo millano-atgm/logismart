@@ -5,7 +5,6 @@ import { RefreshCw } from 'lucide-react'
 import { AreaChart, BarChart, Gauge, RankBar } from '@/components/charts'
 import {
   AnaliseBox,
-  DadosSimulados,
   KpiTile,
   PageIntro,
   Section,
@@ -48,7 +47,6 @@ export default function AnalisesPage() {
           titulo="Análises da operação"
           descricao="Compare consumo, custos, quilometragem, utilização e emissões em diferentes períodos para identificar a origem dos desvios."
         />
-        <DadosSimulados />
       </div>
 
       <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-border bg-card p-3">
@@ -85,7 +83,7 @@ export default function AnalisesPage() {
         <KpiTile label="Redução de CO₂" valor={`${p.reducaoCo2}%`} destaque="positivo" />
       </div>
 
-      <Section titulo={`Evolução — ${p.label}`} descricao="Séries simuladas coerentes com o período selecionado.">
+      <Section titulo={`Evolução — ${p.label}`} descricao="Evolução dos indicadores no período selecionado.">
         <div className="grid grid-cols-1 gap-3 xl:grid-cols-3">
           <Card className="xl:col-span-2">
             <CardHeader>

@@ -2,7 +2,7 @@
 
 import { Factory, Leaf, Sprout } from 'lucide-react'
 import { BarChart } from '@/components/charts'
-import { AnaliseBox, DadosSimulados, KpiTile, PageIntro, Section } from '@/components/shared'
+import { AnaliseBox, KpiTile, PageIntro, Section } from '@/components/shared'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { co2Semana, sustentabilidade } from '@/lib/data'
@@ -23,7 +23,6 @@ export default function SustentabilidadePage() {
           titulo="Sustentabilidade e ODS"
           descricao="Indicadores que conectam a operação logística às metas de eficiência e consumo responsável. A análise dos dados operacionais permite identificar desperdícios e oportunidades de redução do consumo de recursos."
         />
-        <DadosSimulados />
       </div>
 
       <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
@@ -87,7 +86,7 @@ export default function SustentabilidadePage() {
         </Card>
       </div>
 
-      <Section titulo="Resultado ambiental do período" descricao="Estimativas calculadas sobre os dados simulados da semana.">
+      <Section titulo="Resultado ambiental do período" descricao="Estimativas calculadas para o período semanal.">
         <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
           <KpiTile
             label="Litros economizados"

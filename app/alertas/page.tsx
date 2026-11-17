@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { ArrowRight, Check, CircleCheck, Info, TriangleAlert } from 'lucide-react'
-import { DadosSimulados, KpiTile, PageIntro, SeveridadeBadge } from '@/components/shared'
+import { KpiTile, PageIntro, SeveridadeBadge } from '@/components/shared'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import type { Alerta, Severidade } from '@/lib/data'
@@ -118,9 +118,8 @@ export default function AlertasPage() {
       <div className="flex flex-wrap items-start justify-between gap-3">
         <PageIntro
           titulo="Central de alertas"
-          descricao="Ocorrências identificadas pelo LogiSmart a partir dos dados de telemetria simulados, organizadas por prioridade."
+          descricao="Ocorrências identificadas pelo LogiSmart a partir dos dados de telemetria, organizadas por prioridade."
         />
-        <DadosSimulados />
       </div>
 
       <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">

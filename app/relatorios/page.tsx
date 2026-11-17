@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { ArrowRight, FileText } from 'lucide-react'
 import { AreaChart, BarChart } from '@/components/charts'
-import { AnaliseBox, DadosSimulados, KpiTile, PageIntro, Section } from '@/components/shared'
+import { AnaliseBox, KpiTile, PageIntro, Section } from '@/components/shared'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { StatusBadge } from '@/components/shared'
@@ -49,7 +49,6 @@ export default function RelatoriosPage() {
           titulo="Relatório semanal da operação"
           descricao="Resumo consolidado dos principais indicadores da frota nos últimos 7 dias, pronto para apresentação ao gestor."
         />
-        <DadosSimulados />
       </div>
 
       <div className="grid grid-cols-2 gap-3 lg:grid-cols-3 xl:grid-cols-6">
