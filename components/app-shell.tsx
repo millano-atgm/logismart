@@ -14,6 +14,7 @@ import {
   Menu,
   Route,
   RotateCcw,
+  RefreshCw,
   Truck,
   TriangleAlert,
   UserRound,
@@ -101,9 +102,13 @@ function NavLinks({ onNavigate }: { onNavigate?: () => void }) {
 }
 
 function Rodape() {
-  const { restaurarDemo } = useDemo()
+  const { restaurarDemo, novaSimulacao } = useDemo()
   return (
     <div className="flex flex-col gap-2 border-t border-sidebar-border px-3 py-3">
+      <Button variant="default" size="sm" className="w-full" onClick={novaSimulacao}>
+        <RefreshCw className="size-3.5" data-icon="inline-start" />
+        Nova Simulação
+      </Button>
       <Button variant="outline" size="sm" className="w-full" onClick={restaurarDemo}>
         <RotateCcw className="size-3.5" data-icon="inline-start" />
         Restaurar dados da demonstração

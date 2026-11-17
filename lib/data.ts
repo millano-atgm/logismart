@@ -67,6 +67,7 @@ export interface Rota {
   alternativa?: string
   economiaMin?: number
   observacao: string
+  posicao?: { x: number; y: number }
 }
 
 export interface ManutencaoItem {
@@ -901,7 +902,10 @@ export function estadoInicial(): DemoState {
     veiculos: veiculos.map((v) => ({ ...v })),
     alertas: alertas.map((a) => ({ ...a })),
     insights: insights.map((i) => ({ ...i })),
-    rotas: rotas.map((r) => ({ ...r })),
+    rotas: rotas.map((r, index) => ({
+      ...r,
+      posicao: { x: 18 + (index % 4) * 21, y: 24 + (index % 3) * 25 },
+    })),
     manutencoes: manutencoes.map((m) => ({ ...m })),
   }
 }

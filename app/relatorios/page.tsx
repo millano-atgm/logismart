@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import Link from 'next/link'
 import { ArrowRight, FileText } from 'lucide-react'
 import { AreaChart, BarChart } from '@/components/charts'
@@ -11,8 +12,16 @@ import { co2Semana, consumoSemana, CONSUMO_MEDIO_FROTA, periodos } from '@/lib/d
 import { useDemo } from '@/lib/store'
 
 export default function RelatoriosPage() {
-  const { veiculos, alertas, resumo } = useDemo()
+  const { veiculos, alertas, resumo, ultimaAtualizacao } = useDemo()
+  const [statusDownload, setStatusDownload] = useState<'idle' | 'preparando' | 'pronto'>('idle')
   const p = periodos['7d']
+  const consumoMedio = resumo.consumoMedio.toFixed(1).replace('.', ',')
+  const kmTotal = resumo.kmTotal.toLocaleString('pt-BR') + ' km'
+  const custoKm = `R$ ${resumo.custoKm.toFixed(2).replace('.', ',')}`
+  const gerarRelatorio = () => {
+    setStatusDownload('preparando')
+    window.setTimeout(() => setStatusDownload('pronto'), 900)
+  }
 
   const melhores = [...veiculos]
     .filter((v) => v.consumo !== null)
@@ -25,10 +34,10 @@ export default function RelatoriosPage() {
     .slice(0, 3)
 
   const linhas = [
-    { indicador: 'Consumo médio da frota', valor: '8,4 km/L', meta: '8,2 km/L', situacao: 'Acima da meta' },
-    { indicador: 'Custo médio por km', valor: 'R$ 2,17', meta: 'R$ 2,25', situacao: 'Dentro da meta' },
-    { indicador: 'Utilização da frota', valor: '87%', meta: '85%', situacao: 'Acima da meta' },
-    { indicador: 'Quilometragem total', valor: '42.850 km', meta: '40.000 km', situacao: 'Acima do previsto' },
+    { indicador: 'Consumo médio da frota', valor: `${consumoMedio} km/L`, meta: '8,2 km/L', situacao: 'Acima da meta' },
+    { indicador: 'Custo médio por km', valor: custoKm, meta: 'R$ 2,25', situacao: 'Dentro da meta' },
+    { indicador: 'Utilização da frota', valor: `${resumo.utilizacao}%`, meta: '85%', situacao: 'Acima da meta' },
+    { indicador: 'Quilometragem total', valor: kmTotal, meta: '40.000 km', situacao: 'Acima do previsto' },
     { indicador: 'Redução de CO₂', valor: '15%', meta: '12%', situacao: 'Acima da meta' },
     { indicador: 'Alertas críticos abertos', valor: String(resumo.criticos), meta: '0', situacao: 'Requer ação' },
   ]
@@ -44,9 +53,9 @@ export default function RelatoriosPage() {
       </div>
 
       <div className="grid grid-cols-2 gap-3 lg:grid-cols-3 xl:grid-cols-6">
-        <KpiTile label="Km rodados" valor="42.850 km" />
+        <KpiTile label="Km rodados" valor={kmTotal} />
         <KpiTile label="Litros consumidos" valor={`${p.litros.toLocaleString('pt-BR')} L`} />
-        <KpiTile label="Custo total" valor="R$ 92.985" nota="R$ 2,17 por km" />
+        <KpiTile label="Custo total" valor={`R$ ${(resumo.kmTotal * resumo.custoKm).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`} nota={`${custoKm} por km`} />
         <KpiTile label="Entregas no prazo" valor="94%" destaque="positivo" />
         <KpiTile label="Alertas gerados" valor={String(alertas.length)} />
         <KpiTile label="Veículos ativos" valor={`${resumo.emRota + resumo.atencao + resumo.atrasados}/${resumo.total}`} />
@@ -165,6 +174,10 @@ export default function RelatoriosPage() {
       />
 
       <div className="flex flex-wrap items-center gap-3">
+        <Button type="button" variant="default" size="sm" onClick={gerarRelatorio} disabled={statusDownload === 'preparando'}>
+          {statusDownload === 'preparando' ? 'Preparando relatório…' : statusDownload === 'pronto' ? 'Relatório preparado' : 'Baixar relatório'}
+        </Button>
+        <span className="text-xs text-muted-foreground">Atualizado às {ultimaAtualizacao}</span>
         <Button render={<Link href="/analises" />} variant="outline" size="sm">
           <FileText className="size-3.5" data-icon="inline-start" />
           Ver análises detalhadas

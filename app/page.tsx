@@ -19,7 +19,7 @@ import { CONSUMO_MEDIO_FROTA, co2Semana, consumoSemana, utilizacaoSemana } from 
 import { useDemo } from '@/lib/store'
 
 export default function VisaoGeralPage() {
-  const { veiculos, insights, resumo, atualizarIndicadores, ultimaAtualizacao } = useDemo()
+  const { veiculos, insights, resumo, novaSimulacao, ultimaAtualizacao } = useDemo()
 
   const destaque = veiculos.filter((v) =>
     ['cam-02', 'vei-08', 'cam-11', 'cam-05', 'vei-14'].includes(v.id),
@@ -46,9 +46,9 @@ export default function VisaoGeralPage() {
         />
         <div className="flex items-center gap-2">
           <DadosSimulados />
-          <Button variant="outline" size="sm" onClick={atualizarIndicadores}>
+          <Button variant="outline" size="sm" onClick={novaSimulacao}>
             <RefreshCw className="size-3.5" data-icon="inline-start" />
-            Atualizar
+            Nova Simulação
           </Button>
         </div>
       </div>

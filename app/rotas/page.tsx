@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import dynamic from 'next/dynamic'
 import { useState } from 'react'
 import { ArrowRight, MapPin, Route as RouteIcon, Timer } from 'lucide-react'
 import {
@@ -28,6 +29,8 @@ function corTransito(t: Rota['transito']) {
   return t === 'livre' ? 'bg-success' : t === 'moderado' ? 'bg-warning' : 'bg-destructive'
 }
 
+const FleetMap = dynamic(() => import('@/components/fleet-map').then((mod) => mod.FleetMap), { ssr: false })
+
 function RotaCard({ rota }: { rota: Rota }) {
   return (
     <Card className={rota.atrasoMin > 30 ? 'border-warning/40' : undefined}>
@@ -42,7 +45,7 @@ function RotaCard({ rota }: { rota: Rota }) {
           <TransitoBadge transito={rota.transito} />
         </div>
 
-        {/* Representação visual simplificada da rota (sem mapa real) */}
+        {/* Resumo operacional da rota exibido junto ao mapa geográfico */}
         <div className="flex flex-col gap-2">
           <div className="relative flex items-center">
             <span className="grid size-5 shrink-0 place-items-center rounded-full border border-border bg-secondary">
@@ -122,8 +125,9 @@ function RotaCard({ rota }: { rota: Rota }) {
 }
 
 export default function RotasPage() {
-  const { rotas } = useDemo()
+  const { rotas, veiculos, ultimaAtualizacao } = useDemo()
   const [filtro, setFiltro] = useState<'todas' | 'atrasadas' | 'alternativas'>('todas')
+  const [selecionada, setSelecionada] = useState<string | null>(null)
 
   const lista = rotas.filter((r) =>
     filtro === 'todas'
@@ -141,7 +145,7 @@ export default function RotasPage() {
       <div className="flex flex-wrap items-start justify-between gap-3">
         <PageIntro
           titulo="Rotas em andamento"
-          descricao="Visualização simplificada das rotas ativas, situação do trânsito e alternativas sugeridas pelo sistema. Nenhum mapa real ou GPS é utilizado neste protótipo."
+          descricao="Mapa geográfico das rotas ativas, situação do trânsito e alternativas sugeridas pelo sistema. As posições dos veículos são simuladas para esta demonstração."
         />
         <DadosSimulados />
       </div>
@@ -160,6 +164,10 @@ export default function RotasPage() {
           destaque="positivo"
         />
       </div>
+
+      <Section titulo="Posições da frota" descricao="Marcadores e deslocamentos são simulados a partir das rotas ativas.">
+        <FleetMap rotas={rotas} veiculos={veiculos} selecionada={selecionada} onSelecionar={setSelecionada} ultimaAtualizacao={ultimaAtualizacao} />
+      </Section>
 
       <Section
         titulo="Trechos monitorados"
